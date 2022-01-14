@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0' name='viewport' />
+    <title>Aadhaar-v12-Animation</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Roboto", Helvetica, Calibri;
+            width: 100vw;
+            height: 100vh;
+            overflow-x : hidden;
+        }
+
+        #content {
+            width: 100%;
+            padding: 0.2rem 0;
+            position: relative;
+            top: 48%;
+            background-color: #ffffff;
+            
+        }
+
+        .section {
+            height: 5rem;
+            width: 90%;
+            max-width: 500px;
+            margin: auto;
+            position: relative;
+        }
+
+        .container {
+            position: absolute;
+            top: 30%;
+            bottom: 2%;
+            left: 0%;
+            right: 0%;
+            border: 2px solid #b0b0b0;
+            border-radius: 6px;
+            box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.1);
+            pointer-events: none;
+            transition : all 0.2s ease;
+            pointer-events : none;
+
+        }
+
+        .section.active .container {
+            top: 0%;
+            left: -10%;
+            right: -10%;
+        }
+
+        .label-text {
+            position: relative;
+            margin-top: 0.8rem;
+            left: 0.5rem;
+            bottom: -2.3rem;
+            font-size: 1.3rem;
+            line-height: 1.3em;
+            color: #898989;
+            pointer-events: none;
+            transition: all 0.2s ease;
+        }
+
+        .section.active .label-text {
+            bottom: 0rem;
+            font-size: 1rem;
+            line-height: 1em;
+            color: #000000;
+        }
+
+        .input-field {
+            width: 100%;
+            margin-top: 0.5rem;
+            font-size: 1.3rem;
+            line-height: 1.3em;
+            padding: 0.5rem 0 0.5rem 0.5rem;
+            outline: none;
+            border: none;
+            color: #0c0c0c;
+            z-index: 1;
+        }
+
+        .error-field {
+            position: absolute;
+            right: 0;
+            bottom: -10%;
+            font-size: 0.8rem;
+            padding: 0.3rem 0.8rem;
+            color: #a62639;
+            border: 1px solid #a62639;
+            border-radius: 6px;
+            background-color: #fee9ec;
+            transition : all 0.1s ease;
+            display : none;
+        }
+
+        .section.error .error-field {
+            display : block;
+
+        }
+    </style>
+
+</head>
+<body>
+    <div id="content">
+        <div id="aadhaar" class="section">
+            <div class="container"></div>
+            <div class="label-text">Aadhaar Number or Virtual ID</div>
+            <input class="input-field" onfocus="showLabel()" onblur="removeLabel(this.value)" onkeydown="keyPressEvent(event)"/>
+            <div class="error-field">Invalid</div>
+        </div>
+    </div>
+    <script>
+        function getById(id) {
+            return document.getElementById(id);
+        }
+
+        function showLabel() {
+            getById("aadhaar").classList.add("active");
+        }
+
+        function removeLabel(value) {
+            if (value == 0)
+                getById("aadhaar").classList.remove("active");
+        }
+
+        function keyPressEvent(event) {
+            var charCode = event.which || event.keyCode;
+            if (charCode == 13)
+                getById("aadhaar").classList.add("error");
+            else
+                getById("aadhaar").classList.remove("error");
+
+        }
+    </script>
+</body>
+
+</html>
